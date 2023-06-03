@@ -20,16 +20,16 @@
 
     <TextView
         android:id="@+id/idHeaderTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="310dp"
+        android:layout_height="61dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="40dp"
+        android:layout_marginEnd="28dp"
         android:ems="8"
-        android:fontFamily="cursive"
+        android:fontFamily="sans-serif-light"
         android:text="@string/textview"
         android:textAllCaps="false"
         android:textColor="#B0FE76"
-        android:textSize="34sp"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Seek And You Shall Find" />
@@ -73,33 +73,36 @@
         android:id="@+id/idNewPostBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="112dp"
         android:backgroundTint="#37323E"
         android:text="@string/create_new_post"
-        tools:layout_editor_absoluteX="128dp"
-        tools:layout_editor_absoluteY="471dp" />
+        app:layout_constraintBottom_toTopOf="@+id/idFooterView"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/idShowAllItemsBtn"
         android:layout_width="152dp"
         android:layout_height="48dp"
-        android:layout_marginStart="134dp"
-        android:layout_marginEnd="134dp"
-        android:layout_marginBottom="80dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="112dp"
         android:backgroundTint="#37323E"
         android:text="@string/show_all_items"
         app:layout_constraintBottom_toTopOf="@+id/idFooterView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.555"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/idShowItemsOnMapBtn"
         android:layout_width="177dp"
         android:layout_height="49dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginStart="116dp"
+        android:layout_marginEnd="118dp"
+        android:layout_marginBottom="28dp"
         android:backgroundTint="#37323E"
         android:text="Show Items on Map"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        tools:layout_editor_absoluteX="116dp" />
+        app:layout_constraintBottom_toTopOf="@+id/idFooterView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

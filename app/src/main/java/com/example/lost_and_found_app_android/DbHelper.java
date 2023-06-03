@@ -27,7 +27,7 @@ public class DbHelper extends SQLiteOpenHelper {
         super(context, "table_items_lost_and_found", null, 1);
     }
 
-    @Override // Create table.
+    @Override // Create table on activity start.
     public void onCreate(SQLiteDatabase db) {
         String queryCreateTable = "CREATE TABLE IF NOT EXISTS " + TABLE_ITEMS_LOST_AND_FOUND + " (" + ITEM_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + USER_NAME + " VARCHAR(25) NOT NULL, " + PHONE_NUMBER + " INTEGER(15) NOT NULL, " + ITEM_DESCRIPTION + " VARCHAR(255) NOT NULL, " + DATE + " DATETIME DEFAULT CURRENT_TIMESTAMP, " + IS_DELETED + " TINYINT DEFAULT 0, " + ITEM_LOCATION + " VARCHAR(100) NOT NULL DEFAULT NULL, " + LOST_OR_FOUND + " VARCHAR(10) NOT NULL DEFAULT NULL)";
         db.execSQL(queryCreateTable);
@@ -60,7 +60,7 @@ public class DbHelper extends SQLiteOpenHelper {
         }
     }
     public List<LostAndFoundModel> getAllItemRecords () {
-        // Collection of records represented as a dynamic array/vector
+        // Collection of records represented as a dynamic array/vector.
         ArrayList<LostAndFoundModel> itemCollection = new ArrayList<>();
 
         // Make SELECT query
@@ -88,7 +88,7 @@ public class DbHelper extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
 
         } else {
-            // Do not add anything to the list
+            // Do not add anything to the list.
         }
         // Close connection to the Db.
         cursor.close();

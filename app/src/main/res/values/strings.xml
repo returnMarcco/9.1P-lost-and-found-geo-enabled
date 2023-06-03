@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">lost-and-found-app-android</string>
-    <string name="textview">Lost But Not Forgotten</string>
+    <string name="textview">Seek and You Shall Find</string>
     <string name="github_com_returnmarcco">© github.com/returnMarcco</string>
     <string name="show_all_items">Show All Items</string>
     <string name="create_new_post">Create New Post</string>

@@ -10,13 +10,17 @@ import android.view.View.OnClickListener;
 import android.content.Intent;
 
 public class Dashboard extends AppCompatActivity {
+    Button postLostItemBtn;
+    Button showAllLostItemsBtn;
+    Button showMapViewBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dashboard);
 
-        Button postLostItemBtn = findViewById(R.id.idNewPostBtn);
-        Button showAllLostItemsBtn = findViewById(R.id.idShowAllItemsBtn);
+        postLostItemBtn = findViewById(R.id.idNewPostBtn);
+        showAllLostItemsBtn = findViewById(R.id.idShowAllItemsBtn);
+        showMapViewBtn = findViewById(R.id.idShowItemsOnMapBtn);
 
         postLostItemBtn.setOnClickListener(new OnClickListener() {
             @Override
@@ -25,10 +29,19 @@ public class Dashboard extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         showAllLostItemsBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Dashboard.this, SeeAllLostItemsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        showMapViewBtn.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Dashboard.this, MapActivity.class);
                 startActivity(intent);
             }
         });

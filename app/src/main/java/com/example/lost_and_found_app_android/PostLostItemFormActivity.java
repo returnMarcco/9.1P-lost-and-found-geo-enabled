@@ -19,9 +19,11 @@ public class PostLostItemFormActivity extends AppCompatActivity {
     EditText itemDescription;
     EditText dateOfPost;
     EditText locationOfLostFoundItem;
-    Button savePostButton;
+
     String lostOrFoundPost;
     EditText itemLocation;
+    Button getCurrentLocationButton;
+    Button savePostButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,7 @@ public class PostLostItemFormActivity extends AppCompatActivity {
         dateOfPost = findViewById(R.id.idEditTextDate);
         locationOfLostFoundItem = findViewById(R.id.idLocationLostFoundItem);
         savePostButton = findViewById(R.id.idSavePostBtn);
+        getCurrentLocationButton = findViewById(R.id.idGetCurrentLocationBtn);
         lostItemRadioBtn = findViewById(R.id.idLostRadioBtn);
         foundItemRadioBtn = findViewById(R.id.idFoundRadioBtn);
         itemLocation = findViewById(R.id.idLocationLostFoundItem);
@@ -58,22 +61,23 @@ public class PostLostItemFormActivity extends AppCompatActivity {
             @SuppressLint("NewApi")
             @Override
             public void onClick(View view) {
-
                 try {
                     if (lostOrFoundPost != null) {
                         LostAndFoundModel lostAndFoundPost = new LostAndFoundModel(-1, userName.getText().toString(), Integer.parseInt(userPhoneNumber.getText().toString()), itemDescription.getText().toString(), dateOfPost.getText().toString(), false, itemLocation.getText().toString(), lostOrFoundPost);
                         DbHelper dataBaseHelper = new DbHelper(PostLostItemFormActivity.this);
                         boolean success = dataBaseHelper.createLostOrFoundItemRecord(lostAndFoundPost);
+
+                        // Todo @Jason: Create Maps marker using Lat/Lng of location entered on Post activity form.
                         if (success) {
                             Toast.makeText(PostLostItemFormActivity.this, lostOrFoundPost + " item has been posted successfully!", Toast.LENGTH_LONG).show();
                         } else {
                             Toast.makeText(PostLostItemFormActivity.this, "An error has occurred! The item has not been posted.", Toast.LENGTH_LONG).show();
                         }
                     } else {
-                        Toast.makeText(PostLostItemFormActivity.this, "You must select a category for this post", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(PostLostItemFormActivity.this, "You must select a category for this post.", Toast.LENGTH_SHORT).show();
                     }
                 } catch(Exception e) {
-                    Toast.makeText(PostLostItemFormActivity.this, "You must fill out all required fields", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PostLostItemFormActivity.this, "You must fill out all required fields.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
