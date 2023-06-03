@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">lost-and-found-app-android</string>
+    <string name="textview">Lost But Not Forgotten</string>
+    <string name="github_com_returnmarcco">© github.com/returnMarcco</string>
+    <string name="show_all_items">Show All Items</string>
+    <string name="create_new_post">Create New Post</string>
+    <string name="see_all_lost_items">See All Lost Items</string>
+    <string name="remove_found_item">Remove Found Item</string>
+    <string name="post_lost_item_form">Post Lost Item Form</string>
+    <string name="lost">Lost</string>
+    <string name="found">Found</string>
+    <string name="post_type">Post Type:</string>
+    <string name="name">Name:</string>
+    <string name="phone">Phone:</string>
+    <string name="description">Description:</string>
+    <string name="item_description">Description:</string>
+    <string name="date">Date:</string>
+    <string name="location">Location:</string>
+    <string name="save">SAVE</string>
+    <string name="remove">REMOVE</string>
+    <string name="lost_and_found_items">Lost and Found Items</string>
+</resources>
