@@ -19,4 +19,5 @@
     <string name="save">SAVE</string>
     <string name="remove">REMOVE</string>
     <string name="lost_and_found_items">Lost and Found Items</string>
+    <string name="magnifying_glass">Magnifying glass</string>
 </resources>

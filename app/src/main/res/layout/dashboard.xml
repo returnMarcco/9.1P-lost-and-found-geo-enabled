@@ -62,6 +62,7 @@
         android:layout_marginStart="108dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="108dp"
+        android:contentDescription="@string/magnifying_glass"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.718"
         app:layout_constraintStart_toStartOf="parent"
@@ -72,12 +73,10 @@
         android:id="@+id/idNewPostBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="112dp"
-        android:layout_marginBottom="28dp"
         android:backgroundTint="#37323E"
         android:text="@string/create_new_post"
-        app:layout_constraintBottom_toTopOf="@+id/idShowAllItemsBtn"
-        app:layout_constraintStart_toStartOf="@+id/imageView2" />
+        tools:layout_editor_absoluteX="128dp"
+        tools:layout_editor_absoluteY="471dp" />
 
     <Button
         android:id="@+id/idShowAllItemsBtn"
@@ -85,12 +84,22 @@
         android:layout_height="48dp"
         android:layout_marginStart="134dp"
         android:layout_marginEnd="134dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="80dp"
         android:backgroundTint="#37323E"
         android:text="@string/show_all_items"
         app:layout_constraintBottom_toTopOf="@+id/idFooterView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.555"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/idShowItemsOnMapBtn"
+        android:layout_width="177dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="4dp"
+        android:backgroundTint="#37323E"
+        android:text="Show Items on Map"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        tools:layout_editor_absoluteX="116dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
