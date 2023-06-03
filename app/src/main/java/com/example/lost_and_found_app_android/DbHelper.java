@@ -20,6 +20,8 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String DATE = "DATE";
     public static final String IS_DELETED = "IS_DELETED";
     public static final String ITEM_LOCATION = "ITEM_LOCATION";
+    public static final String ITEM_LAT = "ITEM_LAT";
+    public static final String ITEM_LNG = "ITEM_LNG";
     public static final String LOST_OR_FOUND = "LOST_OR_FOUND";
 
 
@@ -49,6 +51,8 @@ public class DbHelper extends SQLiteOpenHelper {
         associativeArray.put(DATE, itemRecord.getDate());
         associativeArray.put(IS_DELETED, itemRecord.getIsDeleted());
         associativeArray.put(ITEM_LOCATION, itemRecord.getItemLocation());
+        associativeArray.put(ITEM_LAT, itemRecord.getItemLat());
+        associativeArray.put(ITEM_LNG, itemRecord.getItemLng());
         associativeArray.put(LOST_OR_FOUND, itemRecord.getLostOrFound());
 
         long insert = db.insert(TABLE_ITEMS_LOST_AND_FOUND, null, associativeArray);
@@ -79,10 +83,11 @@ public class DbHelper extends SQLiteOpenHelper {
                 String itemDescription = cursor.getString(3);
                 String date = cursor.getString(4);
                 boolean isDeleted = cursor.getInt(5) == 1 ? true: false;
-                String itemLocation = cursor.getString(6);
-                String lostOrFoundPost = cursor.getString(7);
+                String lostOrFoundPost = cursor.getString(6);
+                float itemLat = cursor.getFloat(7);
+                float itemLng = cursor.getFloat(8);
 
-                LostAndFoundModel newItemRecord = new LostAndFoundModel(itemID, userName, phoneNumber, itemDescription, date, isDeleted, itemLocation, lostOrFoundPost);
+                LostAndFoundModel newItemRecord = new LostAndFoundModel(itemID, userName, phoneNumber, itemDescription, date, isDeleted, itemLat, itemLng, lostOrFoundPost);
                 itemCollection.add(newItemRecord);
 
             } while (cursor.moveToNext());

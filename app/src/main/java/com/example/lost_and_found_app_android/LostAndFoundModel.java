@@ -9,18 +9,22 @@ public class LostAndFoundModel {
     private int phoneNumber;
     private String itemDescription;
     private String date;
-    private String itemLocation;
+    private String itemLocation; // May need to replace this with float lat/lng.
+    private float itemLat;
+    private float itemLng;
     private boolean isDeleted;
     private String lostOrFound;
 
-    public LostAndFoundModel(int itemId, String userName, int phoneNumber, String itemDescription, String date, boolean isDeleted, String itemLocation, String lostOrFound) {
+
+    public LostAndFoundModel(int itemId, String userName, int phoneNumber, String itemDescription, String date, boolean isDeleted, float itemLat, float itemLng, String lostOrFound) {
         this.itemId = itemId;
         this.userName = userName;
         this.phoneNumber = phoneNumber;
         this.itemDescription = itemDescription;
         this.date = date;
         this.isDeleted = isDeleted;
-        this.itemLocation = itemLocation;
+        this.itemLat = itemLat;
+        this.itemLng = itemLng;
         this.lostOrFound = lostOrFound;
     }
 
@@ -51,8 +55,12 @@ public class LostAndFoundModel {
     public String getItemLocation() {
         return itemLocation;
     }
-
-    public boolean getIsDeleted() {
+    public float getItemLat() {
+        return itemLat;
+    }
+    public float getItemLng() {
+        return itemLng;
+    }public boolean getIsDeleted() {
         return isDeleted;
     }
 
@@ -84,7 +92,12 @@ public class LostAndFoundModel {
     public void setItemLocation(String itemLocation) {
         this.itemLocation = itemLocation;
     }
-
+    public void setItemLat(float itemLat) {
+        this.itemLat = itemLat;
+    }
+    public void setItemLng (float itemLng) {
+        this.itemLng = itemLng;
+    }
     public void setIsDeleted(boolean deleted) {
         isDeleted = deleted;
     }

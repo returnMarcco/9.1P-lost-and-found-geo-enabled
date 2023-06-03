@@ -21,7 +21,8 @@ public class PostLostItemFormActivity extends AppCompatActivity {
     EditText locationOfLostFoundItem;
 
     String lostOrFoundPost;
-    EditText itemLocation;
+    float itemLat;
+    float itemLng;
     Button getCurrentLocationButton;
     Button savePostButton;
 
@@ -41,12 +42,10 @@ public class PostLostItemFormActivity extends AppCompatActivity {
         getCurrentLocationButton = findViewById(R.id.idGetCurrentLocationBtn);
         lostItemRadioBtn = findViewById(R.id.idLostRadioBtn);
         foundItemRadioBtn = findViewById(R.id.idFoundRadioBtn);
-        itemLocation = findViewById(R.id.idLocationLostFoundItem);
         lostItemRadioBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 lostOrFoundPost = "Lost";
-                System.out.println(lostOrFoundPost);
             }
         });
 
@@ -57,21 +56,34 @@ public class PostLostItemFormActivity extends AppCompatActivity {
             }
         });
 
+        getCurrentLocationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /**
+                 * Todo @Jason: Grab users current location via Google Maps Android API
+                 * and store this location in the `locationOfLostOrFoundItem` property. Note: Will
+                 * probably need to replace the `Location` field in the Db with Lat/Lng fields.
+                 */
+
+
+            }
+        });
+
         savePostButton.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("NewApi")
             @Override
             public void onClick(View view) {
                 try {
                     if (lostOrFoundPost != null) {
-                        LostAndFoundModel lostAndFoundPost = new LostAndFoundModel(-1, userName.getText().toString(), Integer.parseInt(userPhoneNumber.getText().toString()), itemDescription.getText().toString(), dateOfPost.getText().toString(), false, itemLocation.getText().toString(), lostOrFoundPost);
+                        LostAndFoundModel lostAndFoundPost = new LostAndFoundModel(-1, userName.getText().toString(), Integer.parseInt(userPhoneNumber.getText().toString()), itemDescription.getText().toString(), dateOfPost.getText().toString(), false, itemLat, itemLng, lostOrFoundPost);
                         DbHelper dataBaseHelper = new DbHelper(PostLostItemFormActivity.this);
                         boolean success = dataBaseHelper.createLostOrFoundItemRecord(lostAndFoundPost);
 
                         // Todo @Jason: Create Maps marker using Lat/Lng of location entered on Post activity form.
                         if (success) {
-                            Toast.makeText(PostLostItemFormActivity.this, lostOrFoundPost + " item has been posted successfully!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(PostLostItemFormActivity.this, lostOrFoundPost + " item has been posted successfully!", Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(PostLostItemFormActivity.this, "An error has occurred! The item has not been posted.", Toast.LENGTH_LONG).show();
+                            Toast.makeText(PostLostItemFormActivity.this, "An error has occurred! The item has not been posted.", Toast.LENGTH_SHORT).show();
                         }
                     } else {
                         Toast.makeText(PostLostItemFormActivity.this, "You must select a category for this post.", Toast.LENGTH_SHORT).show();
