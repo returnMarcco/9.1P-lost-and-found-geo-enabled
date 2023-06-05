@@ -73,7 +73,7 @@ public class PostLostItemFormActivity extends AppCompatActivity {
          */
 
         if (!Places.isInitialized()) {
-            Places.initialize(getApplicationContext(), "AIzaSyCceNIhH58bn4TGnWDJicPuJYQzuO8HeNQ"); // Todo @Jason: DO NOT COMMIT THIS TO SOURCE CONTROL - REFACTOR TO USE ENVIRONMENT VARIABLE
+            Places.initialize(getApplicationContext(), ""); // Todo @Jason: DO NOT COMMIT THIS TO SOURCE CONTROL - REFACTOR TO USE ENVIRONMENT VARIABLE
         }
 
         locationAutocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG));
