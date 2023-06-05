@@ -1,15 +1,27 @@
 package com.example.lost_and_found_app_android;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.Editable;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Button;
 import android.widget.RadioGroup;
 import android.widget.Toast;
+
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
+import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
+
+import java.util.Arrays;
+
 public class PostLostItemFormActivity extends AppCompatActivity {
     RadioGroup lostOrFoundRadioGroup;
     RadioButton lostItemRadioBtn;
@@ -18,12 +30,11 @@ public class PostLostItemFormActivity extends AppCompatActivity {
     EditText userPhoneNumber;
     EditText itemDescription;
     EditText dateOfPost;
-    EditText locationOfLostFoundItem;
-
+    AutocompleteSupportFragment locationAutocompleteFragment;
     String lostOrFoundPost;
-    float itemLat;
-    float itemLng;
-    Button getCurrentLocationButton;
+    double itemLocationLat;
+    double itemLocationLng;
+
     Button savePostButton;
 
     @Override
@@ -37,11 +48,12 @@ public class PostLostItemFormActivity extends AppCompatActivity {
         userPhoneNumber = findViewById(R.id.editTextPhone);
         itemDescription = findViewById(R.id.idItemDescription);
         dateOfPost = findViewById(R.id.idEditTextDate);
-        locationOfLostFoundItem = findViewById(R.id.idLocationLostFoundItem);
         savePostButton = findViewById(R.id.idSavePostBtn);
-        getCurrentLocationButton = findViewById(R.id.idGetCurrentLocationBtn);
         lostItemRadioBtn = findViewById(R.id.idLostRadioBtn);
         foundItemRadioBtn = findViewById(R.id.idFoundRadioBtn);
+        locationAutocompleteFragment = (AutocompleteSupportFragment)
+                getSupportFragmentManager().findFragmentById(R.id.idAutocompleteLocationFragment);
+
         lostItemRadioBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,26 +68,33 @@ public class PostLostItemFormActivity extends AppCompatActivity {
             }
         });
 
-        getCurrentLocationButton.setOnClickListener(new View.OnClickListener() {
+        /**
+         * Google Maps Autocomplete logic
+         */
+
+        if (!Places.isInitialized()) {
+            Places.initialize(getApplicationContext(), "AIzaSyCceNIhH58bn4TGnWDJicPuJYQzuO8HeNQ"); // Todo @Jason: DO NOT COMMIT THIS TO SOURCE CONTROL - REFACTOR TO USE ENVIRONMENT VARIABLE
+        }
+
+        locationAutocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG));
+        locationAutocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
-            public void onClick(View view) {
-                /**
-                 * Todo @Jason: Grab users current location via Google Maps Android API
-                 * and store this location in the `locationOfLostOrFoundItem` property. Note: Will
-                 * probably need to replace the `Location` field in the Db with Lat/Lng fields.
-                 */
+            public void onPlaceSelected(@NonNull Place place) {
+                 itemLocationLat = place.getLatLng().latitude;
+                 itemLocationLng = place.getLatLng().longitude;
+            }@Override
 
-
+            public void onError(@NonNull Status status) {
+                Log.i("Google Maps Autocomplete Error: ", "An error has occurred: " + status);
             }
         });
-
         savePostButton.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("NewApi")
             @Override
             public void onClick(View view) {
                 try {
                     if (lostOrFoundPost != null) {
-                        LostAndFoundModel lostAndFoundPost = new LostAndFoundModel(-1, userName.getText().toString(), Integer.parseInt(userPhoneNumber.getText().toString()), itemDescription.getText().toString(), dateOfPost.getText().toString(), false, itemLat, itemLng, lostOrFoundPost);
+                        LostAndFoundModel lostAndFoundPost = new LostAndFoundModel(-1, userName.getText().toString(), Integer.parseInt(userPhoneNumber.getText().toString()), itemDescription.getText().toString(), dateOfPost.getText().toString(), false, itemLocationLat, itemLocationLng,  lostOrFoundPost);
                         DbHelper dataBaseHelper = new DbHelper(PostLostItemFormActivity.this);
                         boolean success = dataBaseHelper.createLostOrFoundItemRecord(lostAndFoundPost);
 

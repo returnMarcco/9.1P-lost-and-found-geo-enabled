@@ -32,6 +32,7 @@
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TextSizeCheck"
         tools:text="Seek And You Shall Find" />
 
     <View
@@ -103,6 +104,7 @@
         app:layout_constraintBottom_toTopOf="@+id/idFooterView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="HardcodedText,TextSizeCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

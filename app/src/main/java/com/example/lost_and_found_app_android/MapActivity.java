@@ -31,7 +31,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
         googleMap.addMarker(new MarkerOptions()
-                .position(new LatLng(0, 0))
-                .title("Marker"));
+                .position(new LatLng(-37.8136, 144.9631))
+                .title("Melbourne, Victoria"));
     }
 }

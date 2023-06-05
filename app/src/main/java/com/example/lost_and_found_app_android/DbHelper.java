@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,23 +25,26 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String ITEM_LAT = "ITEM_LAT";
     public static final String ITEM_LNG = "ITEM_LNG";
     public static final String LOST_OR_FOUND = "LOST_OR_FOUND";
+    private int dbVersion = 2;
 
 
     public DbHelper(@Nullable Context context) {
-        super(context, "table_items_lost_and_found", null, 1);
+        super(context, "table_items_lost_and_found", null, 2);
     }
 
     @Override // Create table on activity start.
     public void onCreate(SQLiteDatabase db) {
-        String queryCreateTable = "CREATE TABLE IF NOT EXISTS " + TABLE_ITEMS_LOST_AND_FOUND + " (" + ITEM_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + USER_NAME + " VARCHAR(25) NOT NULL, " + PHONE_NUMBER + " INTEGER(15) NOT NULL, " + ITEM_DESCRIPTION + " VARCHAR(255) NOT NULL, " + DATE + " DATETIME DEFAULT CURRENT_TIMESTAMP, " + IS_DELETED + " TINYINT DEFAULT 0, " + ITEM_LOCATION + " VARCHAR(100) NOT NULL DEFAULT NULL, " + LOST_OR_FOUND + " VARCHAR(10) NOT NULL DEFAULT NULL)";
+        String queryCreateTable = "CREATE TABLE " + TABLE_ITEMS_LOST_AND_FOUND + " (" + ITEM_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + USER_NAME + " VARCHAR(25) NOT NULL, " + PHONE_NUMBER + " INTEGER(15) NOT NULL, " + ITEM_DESCRIPTION + " VARCHAR(255) NOT NULL, " + DATE + " DATETIME DEFAULT CURRENT_TIMESTAMP, " + IS_DELETED + " TINYINT DEFAULT 0, " + ITEM_LOCATION + " VARCHAR(100) NOT NULL DEFAULT NULL, " + LOST_OR_FOUND + " VARCHAR(10) NOT NULL DEFAULT NULL)";
         db.execSQL(queryCreateTable);
     }
 
     @Override // Called when Database schema changes in the code - will sync this change with the local Db instance.
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int x) {
-
+    public void onUpgrade(SQLiteDatabase db, int i, int x) {
+        if (dbVersion == 2) {
+            db.execSQL("ALTER TABLE " + TABLE_ITEMS_LOST_AND_FOUND + " ADD COLUMN " + ITEM_LAT + " INTEGER DEFAULT NULL");
+            db.execSQL("ALTER TABLE " + TABLE_ITEMS_LOST_AND_FOUND + " ADD COLUMN " + ITEM_LNG + " INTEGER DEFAULT NULL");
+        }
     }
-
     public boolean createLostOrFoundItemRecord(LostAndFoundModel itemRecord) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues associativeArray = new ContentValues();
@@ -49,11 +54,11 @@ public class DbHelper extends SQLiteOpenHelper {
         associativeArray.put(PHONE_NUMBER, itemRecord.getPhoneNumber());
         associativeArray.put(ITEM_DESCRIPTION, itemRecord.getItemDescription());
         associativeArray.put(DATE, itemRecord.getDate());
-        associativeArray.put(IS_DELETED, itemRecord.getIsDeleted());
         associativeArray.put(ITEM_LOCATION, itemRecord.getItemLocation());
-        associativeArray.put(ITEM_LAT, itemRecord.getItemLat());
-        associativeArray.put(ITEM_LNG, itemRecord.getItemLng());
+        associativeArray.put(ITEM_LAT, itemRecord.getItemLocationLat());
+        associativeArray.put(ITEM_LNG, itemRecord.getItemLocationLng());
         associativeArray.put(LOST_OR_FOUND, itemRecord.getLostOrFound());
+        associativeArray.put(ITEM_LOCATION, "SEE MAP FOR PRECISE ITEM LOCATION");
 
         long insert = db.insert(TABLE_ITEMS_LOST_AND_FOUND, null, associativeArray);
 
@@ -84,12 +89,11 @@ public class DbHelper extends SQLiteOpenHelper {
                 String date = cursor.getString(4);
                 boolean isDeleted = cursor.getInt(5) == 1 ? true: false;
                 String lostOrFoundPost = cursor.getString(6);
-                float itemLat = cursor.getFloat(7);
-                float itemLng = cursor.getFloat(8);
+                double itemLocationLat = cursor.getDouble(7);
+                double itemLocationLng = cursor.getDouble(8);
 
-                LostAndFoundModel newItemRecord = new LostAndFoundModel(itemID, userName, phoneNumber, itemDescription, date, isDeleted, itemLat, itemLng, lostOrFoundPost);
+                LostAndFoundModel newItemRecord = new LostAndFoundModel(itemID, userName, phoneNumber, itemDescription, date, isDeleted, itemLocationLat, itemLocationLng, lostOrFoundPost);
                 itemCollection.add(newItemRecord);
-
             } while (cursor.moveToNext());
 
         } else {

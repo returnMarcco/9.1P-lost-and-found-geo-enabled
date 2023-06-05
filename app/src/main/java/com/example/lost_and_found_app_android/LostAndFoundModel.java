@@ -1,5 +1,7 @@
 package com.example.lost_and_found_app_android;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.sql.Date;
 import java.time.LocalDate;
 
@@ -9,27 +11,25 @@ public class LostAndFoundModel {
     private int phoneNumber;
     private String itemDescription;
     private String date;
-    private String itemLocation; // May need to replace this with float lat/lng.
-    private float itemLat;
-    private float itemLng;
+    private String itemLocation;
+
+    private double itemLocationLat;
+    private double itemLocationLng;
     private boolean isDeleted;
     private String lostOrFound;
-
-
-    public LostAndFoundModel(int itemId, String userName, int phoneNumber, String itemDescription, String date, boolean isDeleted, float itemLat, float itemLng, String lostOrFound) {
+    public LostAndFoundModel(int itemId, String userName, int phoneNumber, String itemDescription, String date, boolean isDeleted, double itemLocationLat, double itemLocationLng, String lostOrFound) {
         this.itemId = itemId;
         this.userName = userName;
         this.phoneNumber = phoneNumber;
         this.itemDescription = itemDescription;
         this.date = date;
         this.isDeleted = isDeleted;
-        this.itemLat = itemLat;
-        this.itemLng = itemLng;
         this.lostOrFound = lostOrFound;
+        this.itemLocationLat = itemLocationLat;
+        this.itemLocationLng = itemLocationLng;
     }
-
     public String toString() {
-        return this.itemId + ", " + this.userName + ", " + this.phoneNumber + ", " + itemDescription + ", " + date + ", " + itemLocation + ", " + lostOrFound;
+        return itemId + ", " + userName + ", " + phoneNumber + ", " + itemDescription + ", " + date + ", " + itemLocation + ",  "  + itemLocationLat + ", " + itemLocationLng + ", " + lostOrFound;
     }
     // Getters
     public int getItemId() {
@@ -55,11 +55,11 @@ public class LostAndFoundModel {
     public String getItemLocation() {
         return itemLocation;
     }
-    public float getItemLat() {
-        return itemLat;
+    public double getItemLocationLat() {
+        return itemLocationLat;
     }
-    public float getItemLng() {
-        return itemLng;
+    public double getItemLocationLng() {
+        return itemLocationLng;
     }public boolean getIsDeleted() {
         return isDeleted;
     }
@@ -84,7 +84,6 @@ public class LostAndFoundModel {
     public void setItemDescription(String itemDescription) {
         this.itemDescription = itemDescription;
     }
-
     public void setDate(String date) {
         this.date = date;
     }
@@ -92,12 +91,7 @@ public class LostAndFoundModel {
     public void setItemLocation(String itemLocation) {
         this.itemLocation = itemLocation;
     }
-    public void setItemLat(float itemLat) {
-        this.itemLat = itemLat;
-    }
-    public void setItemLng (float itemLng) {
-        this.itemLng = itemLng;
-    }
+
     public void setIsDeleted(boolean deleted) {
         isDeleted = deleted;
     }
