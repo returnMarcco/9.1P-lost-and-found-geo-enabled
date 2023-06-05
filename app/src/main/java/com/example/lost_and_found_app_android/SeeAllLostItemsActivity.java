@@ -46,6 +46,7 @@ public class SeeAllLostItemsActivity extends AppCompatActivity {
                             LostAndFoundModel clickedPostModel = (LostAndFoundModel) adapterView.getItemAtPosition(i);
                             dataBaseHelper.deleteLostOrFoundItemRecord(clickedPostModel);
                             Toast.makeText(SeeAllLostItemsActivity.this, "Post Successfully Deleted", Toast.LENGTH_SHORT).show();
+                            deletePostBtn.setVisibility(View.INVISIBLE);
                         }
                     });
                 } else {

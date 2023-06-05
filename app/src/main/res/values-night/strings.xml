@@ -22,4 +22,5 @@
     <string name="magnifying_glass">Magnifying glass</string>
     <string name="name_input">Name:</string>
     <string name="location_of_item">Location of item:</string>
+    <string name="delete">DELETE</string>
 </resources>

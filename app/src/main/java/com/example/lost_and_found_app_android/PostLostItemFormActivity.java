@@ -35,6 +35,8 @@ public class PostLostItemFormActivity extends AppCompatActivity {
     double itemLocationLat;
     double itemLocationLng;
 
+    String itemLocationName;
+
     Button savePostButton;
 
     @Override
@@ -73,7 +75,7 @@ public class PostLostItemFormActivity extends AppCompatActivity {
          */
 
         if (!Places.isInitialized()) {
-            Places.initialize(getApplicationContext(), ""); // Todo @Jason: DO NOT COMMIT THIS TO SOURCE CONTROL - REFACTOR TO USE ENVIRONMENT VARIABLE
+            Places.initialize(getApplicationContext(), "AIzaSyDWkdNAqgbZ6FtsvqWZYKO4eC_sssdut1w"); // Todo @Jason: REMOVE BEFORE PUSHING
         }
 
         locationAutocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG));
@@ -82,8 +84,9 @@ public class PostLostItemFormActivity extends AppCompatActivity {
             public void onPlaceSelected(@NonNull Place place) {
                  itemLocationLat = place.getLatLng().latitude;
                  itemLocationLng = place.getLatLng().longitude;
-            }@Override
-
+                 itemLocationName = place.getName();
+            }
+            @Override
             public void onError(@NonNull Status status) {
                 Log.i("Google Maps Autocomplete Error: ", "An error has occurred: " + status);
             }
@@ -94,7 +97,7 @@ public class PostLostItemFormActivity extends AppCompatActivity {
             public void onClick(View view) {
                 try {
                     if (lostOrFoundPost != null) {
-                        LostAndFoundModel lostAndFoundPost = new LostAndFoundModel(-1, userName.getText().toString(), Integer.parseInt(userPhoneNumber.getText().toString()), itemDescription.getText().toString(), dateOfPost.getText().toString(), false, itemLocationLat, itemLocationLng,  lostOrFoundPost);
+                        LostAndFoundModel lostAndFoundPost = new LostAndFoundModel(-1, userName.getText().toString(), Integer.parseInt(userPhoneNumber.getText().toString()), itemDescription.getText().toString(), dateOfPost.getText().toString(), false, itemLocationLat, itemLocationName, itemLocationLng,  lostOrFoundPost);
                         DbHelper dataBaseHelper = new DbHelper(PostLostItemFormActivity.this);
                         boolean success = dataBaseHelper.createLostOrFoundItemRecord(lostAndFoundPost);
 

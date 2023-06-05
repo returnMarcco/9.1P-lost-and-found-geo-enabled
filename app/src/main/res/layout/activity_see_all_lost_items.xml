@@ -12,7 +12,7 @@
         android:layout_width="403dp"
         android:layout_height="378dp"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="28dp"
         android:layout_marginEnd="1dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,6 +43,7 @@
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TextSizeCheck"
         tools:text="Seek And You Shall Find" />
 
     <View
@@ -88,7 +89,7 @@
         android:layout_marginEnd="163dp"
         android:layout_marginBottom="7dp"
         android:backgroundTint="#37323E"
-        android:text="DELETE"
+        android:text="@string/delete"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/idFooterView"
         app:layout_constraintEnd_toEndOf="parent"

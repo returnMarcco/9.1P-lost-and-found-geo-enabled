@@ -4,32 +4,32 @@ import com.google.android.gms.maps.model.LatLng;
 
 import java.sql.Date;
 import java.time.LocalDate;
-
 public class LostAndFoundModel {
     private int itemId;
     private String userName;
     private int phoneNumber;
     private String itemDescription;
     private String date;
-    private String itemLocation;
+    private String itemLocationName;
 
     private double itemLocationLat;
     private double itemLocationLng;
     private boolean isDeleted;
     private String lostOrFound;
-    public LostAndFoundModel(int itemId, String userName, int phoneNumber, String itemDescription, String date, boolean isDeleted, double itemLocationLat, double itemLocationLng, String lostOrFound) {
+    public LostAndFoundModel(int itemId, String userName, int phoneNumber, String itemDescription, String date, boolean isDeleted, double itemLocationLat, String itemLocationName, double itemLocationLng, String lostOrFound) {
         this.itemId = itemId;
         this.userName = userName;
         this.phoneNumber = phoneNumber;
         this.itemDescription = itemDescription;
         this.date = date;
         this.isDeleted = isDeleted;
-        this.lostOrFound = lostOrFound;
         this.itemLocationLat = itemLocationLat;
+        this.itemLocationName = itemLocationName;
         this.itemLocationLng = itemLocationLng;
+        this.lostOrFound = lostOrFound;
     }
     public String toString() {
-        return itemId + ", " + userName + ", " + phoneNumber + ", " + itemDescription + ", " + date + ", " + itemLocation + ",  "  + itemLocationLat + ", " + itemLocationLng + ", " + lostOrFound;
+        return  "ID: " + itemId + ", Name: " + userName + ", Phone: " + phoneNumber + ", Item: " + itemDescription + ", Date: " + date + ", Item Location: " + itemLocationName + ", Lost Or Found: " + lostOrFound;
     }
     // Getters
     public int getItemId() {
@@ -53,7 +53,7 @@ public class LostAndFoundModel {
     }
 
     public String getItemLocation() {
-        return itemLocation;
+        return itemLocationName;
     }
     public double getItemLocationLat() {
         return itemLocationLat;
@@ -89,7 +89,7 @@ public class LostAndFoundModel {
     }
 
     public void setItemLocation(String itemLocation) {
-        this.itemLocation = itemLocation;
+        this.itemLocationName = itemLocation;
     }
 
     public void setIsDeleted(boolean deleted) {
