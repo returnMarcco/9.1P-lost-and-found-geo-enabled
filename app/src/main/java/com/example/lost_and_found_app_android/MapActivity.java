@@ -55,7 +55,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
               while(itemLatList.size() > iteratorFlagLat &&
                       itemLngList.size() > iteratorFlagLng &&
-                      itemLocationList.size() > iteratorFlagItemLocation) {
+                      itemLocationList.size() > iteratorFlagItemLocation &&
+                      itemDescriptionList.size() > iteratorFlagItemDescription) {
                   latStr = itemLatList.get(iteratorFlagLat).toString();
                   lngStr = itemLngList.get(iteratorFlagLng).toString();
 
