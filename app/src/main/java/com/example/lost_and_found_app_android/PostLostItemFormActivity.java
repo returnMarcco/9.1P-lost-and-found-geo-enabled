@@ -34,9 +34,7 @@ public class PostLostItemFormActivity extends AppCompatActivity {
     String lostOrFoundPost;
     double itemLocationLat;
     double itemLocationLng;
-
     String itemLocationName;
-
     Button savePostButton;
 
     @Override
@@ -75,7 +73,7 @@ public class PostLostItemFormActivity extends AppCompatActivity {
          */
 
         if (!Places.isInitialized()) {
-            Places.initialize(getApplicationContext(), "AIzaSyDWkdNAqgbZ6FtsvqWZYKO4eC_sssdut1w"); // Todo @Jason: REMOVE BEFORE PUSHING
+            Places.initialize(getApplicationContext(), "AIzaSyAWhXUeOuBnND-bYhyd2_CeixffStDGCw4"); // Todo @Jason: REMOVE BEFORE PUSHING
         }
 
         locationAutocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG));
